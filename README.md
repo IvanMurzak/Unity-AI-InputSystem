@@ -13,6 +13,8 @@
 
 </div>
 
+<img width="100%" alt="InputSystem" src="https://github.com/IvanMurzak/Unity-AI-InputSystem/raw/main/docs/promo/promo-inputsystem.gif"/>
+
 AI-powered tools for the Unity [Input System](https://docs.unity3d.com/Packages/com.unity.inputsystem@1.7/manual/index.html) authoring workflow. Create `InputActionAsset`s, add and remove action maps, actions, and bindings, build composite bindings (1D/2D axes), define control schemes, save assets, and modify any input asset field directly through natural language commands — no manual Input Actions editor navigation. Wraps Unity's **Input System** package (`com.unity.inputsystem`). Ideal for rapidly bootstrapping player controls, prototyping input layouts, and wiring gameplay actions. Built on top of the [AI Game Developer](https://github.com/IvanMurzak/Unity-MCP) platform.
 
 ### How to use

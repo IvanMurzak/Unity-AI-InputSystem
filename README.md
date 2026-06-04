@@ -1,204 +1,79 @@
-<h1 align="center"><a href="https://github.com/IvanMurzak/Unity-AI-Tools-Template">Unity AI Tools Template</a></h1>
+<h1 align="center"><a href="https://github.com/IvanMurzak/Unity-AI-InputSystem?tab=readme-ov-file#unity-ai-inputsystem">Unity AI InputSystem</a></h1>
 
-<img width="100%" alt="Stats" src="https://github.com/IvanMurzak/Unity-AI-Tools-Template/raw/main/docs/img/ai-template-glitch.gif"/>
+<div align="center" width="100%">
 
-Template for AI MCP Tools for [AI Game Developer (Unity-MCP)](https://github.com/IvanMurzak/Unity-MCP). Use this template to create your custom MCP tools for Unity Engine in 30 minutes. Read more about custom MCP tools [here](https://github.com/IvanMurzak/Unity-MCP?tab=readme-ov-file#add-custom-mcp-tool).
+[![MCP](https://badge.mcpx.dev 'MCP Server')](https://modelcontextprotocol.io/introduction)
+[![OpenUPM](https://img.shields.io/npm/v/com.ivanmurzak.unity.mcp.inputsystem?label=OpenUPM&registry_uri=https://package.openupm.com&labelColor=333A41 'OpenUPM package')](https://openupm.com/packages/com.ivanmurzak.unity.mcp.inputsystem/)
+[![Unity Editor](https://img.shields.io/badge/Editor-X?style=flat&logo=unity&labelColor=333A41&color=2A2A2A 'Unity Editor supported')](https://unity.com/releases/editor/archive)
+[![r](https://github.com/IvanMurzak/Unity-AI-InputSystem/workflows/release/badge.svg 'Tests Passed')](https://github.com/IvanMurzak/Unity-AI-InputSystem/actions/workflows/release.yml)</br>
+[![Discord](https://img.shields.io/badge/Discord-Join-7289da?logo=discord&logoColor=white&labelColor=333A41 'Join')](https://discord.gg/cfbdMZX99G)
+[![Stars](https://img.shields.io/github/stars/IvanMurzak/Unity-AI-InputSystem 'Stars')](https://github.com/IvanMurzak/Unity-AI-InputSystem/stargazers)
+[![License](https://img.shields.io/github/license/IvanMurzak/Unity-AI-InputSystem?label=License&labelColor=333A41)](https://github.com/IvanMurzak/Unity-AI-InputSystem/blob/main/LICENSE)
+[![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://stand-with-ukraine.pp.ua)
 
-This template repository is designed to be easily updated into a real Unity package. Please follow the instruction bellow, it will help you to go through the entire process of package creation, distribution and installing.
+</div>
 
-# Steps to make your package
+AI-powered tools for the Unity [Input System](https://docs.unity3d.com/Packages/com.unity.inputsystem@1.7/manual/index.html) authoring workflow. Create `InputActionAsset`s, add and remove action maps, actions, and bindings, build composite bindings (1D/2D axes), define control schemes, save assets, and modify any input asset field directly through natural language commands — no manual Input Actions editor navigation. Wraps Unity's **Input System** package (`com.unity.inputsystem`). Ideal for rapidly bootstrapping player controls, prototyping input layouts, and wiring gameplay actions. Built on top of the [AI Game Developer](https://github.com/IvanMurzak/Unity-MCP) platform.
 
-### 1️⃣ Click the button - create repository
+### How to use
 
-[![create new repository](https://user-images.githubusercontent.com/9135028/198753285-3d3c9601-0711-43c7-a8f2-d40ec42393a2.png)](https://github.com/IvanMurzak/Unity-AI-Tools-Template/generate)
+- [Instructions](https://github.com/IvanMurzak/Unity-MCP?tab=readme-ov-file#step-2-install-mcp-client)
+- [Video Tutorial for Visual Studio Code](https://www.youtube.com/watch?v=ZhP7Ju91mOE)
+- [Video Tutorial for Visual Studio](https://www.youtube.com/watch?v=RGdak4T69mc)
 
-### 2️⃣ Clone your new repository
+[![DOWNLOAD INSTALLER](https://github.com/IvanMurzak/Unity-MCP/blob/main/docs/img/button/button_download.svg?raw=true)](https://github.com/IvanMurzak/Unity-AI-InputSystem/releases/latest/download/AI-InputSystem-Installer.unitypackage)
 
-### 3️⃣ Initialize Project
+### Stability status
 
-Use the initialization script to rename the package and replace all placeholders.
+| Unity Version | Editmode                                                                                                                                                                                                          | Playmode                                                                                                                                                                                                          | Standalone                                                                                                                                                                                                          |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2022.3.62f3   | [![r](https://github.com/IvanMurzak/Unity-AI-InputSystem/workflows/release/badge.svg?job=test-unity-2022-3-62f3-editmode)](https://github.com/IvanMurzak/Unity-AI-InputSystem/actions/workflows/release.yml)       | [![r](https://github.com/IvanMurzak/Unity-AI-InputSystem/workflows/release/badge.svg?job=test-unity-2022-3-62f3-playmode)](https://github.com/IvanMurzak/Unity-AI-InputSystem/actions/workflows/release.yml)       | [![r](https://github.com/IvanMurzak/Unity-AI-InputSystem/workflows/release/badge.svg?job=test-unity-2022-3-62f3-standalone)](https://github.com/IvanMurzak/Unity-AI-InputSystem/actions/workflows/release.yml)       |
+| 2023.2.22f1   | [![r](https://github.com/IvanMurzak/Unity-AI-InputSystem/workflows/release/badge.svg?job=test-unity-2023-2-22f1-editmode)](https://github.com/IvanMurzak/Unity-AI-InputSystem/actions/workflows/release.yml)       | [![r](https://github.com/IvanMurzak/Unity-AI-InputSystem/workflows/release/badge.svg?job=test-unity-2023-2-22f1-playmode)](https://github.com/IvanMurzak/Unity-AI-InputSystem/actions/workflows/release.yml)       | [![r](https://github.com/IvanMurzak/Unity-AI-InputSystem/workflows/release/badge.svg?job=test-unity-2023-2-22f1-standalone)](https://github.com/IvanMurzak/Unity-AI-InputSystem/actions/workflows/release.yml)       |
+| 6000.3.1f1    | [![r](https://github.com/IvanMurzak/Unity-AI-InputSystem/workflows/release/badge.svg?job=test-unity-6000-3-1f1-editmode)](https://github.com/IvanMurzak/Unity-AI-InputSystem/actions/workflows/release.yml)        | [![r](https://github.com/IvanMurzak/Unity-AI-InputSystem/workflows/release/badge.svg?job=test-unity-6000-3-1f1-playmode)](https://github.com/IvanMurzak/Unity-AI-InputSystem/actions/workflows/release.yml)        | [![r](https://github.com/IvanMurzak/Unity-AI-InputSystem/workflows/release/badge.svg?job=test-unity-6000-3-1f1-standalone)](https://github.com/IvanMurzak/Unity-AI-InputSystem/actions/workflows/release.yml)        |
 
-```powershell
-./commands/init.ps1 -PackageId "com.company.package" -PackageName "My Package"
-```
+## AI InputSystem Tools
 
-This script will:
-- Rename directories and files.
-- Replace `com.IvanMurzak.Unity.MCP.InputSystem`, `AI InputSystem`, etc. in all files and folder names.
+13 tools, grouped by purpose:
 
-### 4️⃣ Update `package.json`
-Open `Unity-Package/Assets/root/package.json` and update:
-- `description`
-- `author`
-- `keywords`
-- `unity` (minimum supported Unity version)
+### Asset lifecycle
 
-2. **Generate Meta Files**
-   To ensure all Unity meta files are correctly generated:
-   - Open Unity Hub.
-   - Add the `Installer` folder as a project.
-   - Add the `Unity-Package` folder as a project.
-   - Open both projects in Unity Editor. This will generate the necessary `.meta` files.
+- `inputsystem-asset-create` - Create a new `InputActionAsset` at a project path
+- `inputsystem-get` - Get the structure of an `InputActionAsset` (action maps, actions, bindings, control schemes)
+- `inputsystem-save` - Save the `InputActionAsset` to disk
 
-### 5️⃣ Generate Meta Files
+### Action maps & actions
 
-#### Using script
-   Open Unity project to generate `.meta` files.
-   **On Mac and Linux**:
-   ```bash
-   ./commands/open-all-projects-unix.sh
-   ```
-   **On Windows**:
-   ```bash
-   ./commands/open-all-projects-windows.ps1
-   ```
-#### OR Manually
-   You may open the projects manually to achieve the same result.
-   - Open Unity Hub.
-   - Add the `Installer` folder as a project.
-   - Add the `Unity-Package` folder as a project.
-   - Open both projects in Unity Editor. This will generate the necessary `.meta` files.
+- `inputsystem-actionmap-add` - Add an action map to the asset
+- `inputsystem-actionmap-remove` - Remove an action map by name
+- `inputsystem-action-add` - Add an action (Button / Value / PassThrough) to an action map
+- `inputsystem-action-remove` - Remove an action from an action map
 
-### 6️⃣ Add MCP Tools
+### Bindings
 
-Decide what type of MCP tool you need:
+- `inputsystem-binding-add` - Add a simple binding (e.g. `<Keyboard>/space`) to an action
+- `inputsystem-binding-composite-add` - Add a composite binding (1D axis, 2D vector / WASD, …) to an action
+- `inputsystem-binding-set` - Set / update an existing binding's path or properties
+- `inputsystem-binding-remove` - Remove a binding from an action
 
-- **MCP tool for Unity Editor**
-  - ✔️ Works in Unity Editor (Edit Mode)
-  - ✔️ Works in Unity Editor (Play Mode)
-  - ✔️ Has access to Editor API
-  - ❌ Available in a game build
-- **MCP tool for Unity Runtime**
-  - ✔️ Works in Unity Editor (Edit Mode)
-  - ✔️ Works in Unity Editor (Play Mode)
-  - ❌ Has access to Editor API
-  - ✔️ Available in a game build
+### Control schemes & generic
 
-Based on your choice create script at the location
+- `inputsystem-controlscheme-add` - Add a control scheme (device requirements) to the asset
+- `inputsystem-modify` - Generic write: apply a `SerializedMember` diff to any Input System object via ReflectorNet (escape hatch for fields not covered by the dedicated tools)
 
-- Editor: `Unity-Package/Assets/root/Editor`
-- Runtime: `Unity-Package/Assets/root/Runtime`
+## Installation
 
-> Read detailed instructions about custom tool development [here](https://github.com/IvanMurzak/Unity-MCP?tab=readme-ov-file#add-custom-mcp-tool).
+### Option 1 - Installer
 
-```csharp
-[McpPluginToolType]
-public static class MyCustomTool
-{
-    [McpPluginTool("my-custom-feature", Title = "Do my custom feature")]
-    [Description("Put here the tool description for LLM.")]
-    public static Task<bool> DoTurn(
-        [Description("Add description to the input property, help LLM better understand it.)]
-        int figureId,
-        [Description("Add description to the input property, help LLM better understand it.)]
-        Vector2Int position)
-    {
-        // do any logic in background thread here
-        return MainThread.Instance.RunAsync(() =>
-        {
-            // do any logic in main thread here
+- **[Download Installer](https://github.com/IvanMurzak/Unity-AI-InputSystem/releases/latest/download/AI-InputSystem-Installer.unitypackage)**
+- **Import installer into Unity project**
+  > - You can double-click on the file - Unity will open it automatically
+  > - OR: Open Unity Editor first, then click on `Assets/Import Package/Custom Package`, and choose the file
 
-            return true;
-        });
-    }
-}
-```
-
----
-
-# Optional steps
-
-### 1. Version Management
-
-To update the package version across all files (package.json, Installer.cs, etc.), use the bump version script:
-
-```powershell
-.\commands\bump-version.ps1 -NewVersion "1.0.1"
-```
-
-### 2. Setup CI/CD
-
-To enable automatic testing and deployment:
-
-1.  **Configure GitHub Secrets**
-    Go to `Settings` > `Secrets and variables` > `Actions` > `New repository secret` and add:
-    -   `UNITY_EMAIL`: Your Unity account email.
-    -   `UNITY_PASSWORD`: Your Unity account password.
-    -   `UNITY_LICENSE`: Content of your `Unity_lic.ulf` file.
-        -   Windows: `C:/ProgramData/Unity/Unity_lic.ulf`
-        -   Mac: `/Library/Application Support/Unity/Unity_lic.ulf`
-        -   Linux: `~/.local/share/unity3d/Unity/Unity_lic.ulf`
-
-2.  **Enable Workflows**
-    Rename the sample workflow files to enable them:
-    -   `.github/workflows/release.yml-sample` ➡️ `.github/workflows/release.yml`
-    -   `.github/workflows/test_pull_request.yml-sample` ➡️ `.github/workflows/test_pull_request.yml`
-
-3.  **Update Unity Version**
-    Open both `.yml` files and update the `UNITY_VERSION` (or similar variable) to match your project's Unity Editor version.
-
-4.  **Automatic Deployment**
-    The release workflow triggers automatically when you push to the `main` branch with an incremented version in `package.json`.
-
-### 3. Add files into `Unity-Package/Assets/root` folder
-
-[Unity guidelines](https://docs.unity3d.com/Manual/cus-layout.html) about organizing files into the package root directory
-
-```text
-  <root>
-  ├── package.json
-  ├── README.md
-  ├── CHANGELOG.md
-  ├── LICENSE.md
-  ├── Third Party Notices.md
-  ├── Editor
-  │   ├── [company-name].[package-name].Editor.asmdef
-  │   └── EditorExample.cs
-  ├── Runtime
-  │   ├── [company-name].[package-name].asmdef
-  │   └── RuntimeExample.cs
-  ├── Tests
-  │   ├── Editor
-  │   │   ├── [company-name].[package-name].Editor.Tests.asmdef
-  │   │   └── EditorExampleTest.cs
-  │   └── Runtime
-  │        ├── [company-name].[package-name].Tests.asmdef
-  │        └── RuntimeExampleTest.cs
-  ├── Samples~
-  │        ├── SampleFolder1
-  │        ├── SampleFolder2
-  │        └── ...
-  └── Documentation~
-       └── [package-name].md
-```
-
-# Final polishing
-
-- Update the `README.md` file (this file) with information about your package.
-- Copy the updated `README.md` to `Assets/root` as well.
-
-> ⚠️ Everything outside of the `root` folder won't be added to your package. But still could be used for testing or showcasing your package at your repository.
-
-### 1. Deploy to any registry you like
-
-- [Deploy to OpenUPM](https://github.com/IvanMurzak/Unity-Package-Template/blob/main/Docs/Deploy-OpenUPM.md) (recommended)
-- [Deploy using GitHub](https://github.com/IvanMurzak/Unity-Package-Template/blob/main/Docs/Deploy-GitHub.md)
-- [Deploy to npmjs.com](https://github.com/IvanMurzak/Unity-Package-Template/blob/main/Docs/Deploy-npmjs.md)
-
-### 2. Install your package into Unity Project
-
-When your package is distributed, you can install it into any Unity project.
-
-> Don't install into the same Unity project, please use another one.
+### Option 2 - OpenUPM-CLI
 
 - [Install OpenUPM-CLI](https://github.com/openupm/openupm-cli#installation)
-- Open a command line at the root of Unity project (the folder which contains `Assets`)
-- Execute the command (for `OpenUPM` hosted package)
+- Open the command line in your Unity project folder
 
-  ```bash
-  openupm add AI InputSystem
-  ```
-
-# Final view in Unity Package Manager
-
-![image](https://user-images.githubusercontent.com/9135028/198777922-fdb71949-aee7-49c8-800f-7db885de9453.png)
+```bash
+openupm add com.ivanmurzak.unity.mcp.inputsystem
+```

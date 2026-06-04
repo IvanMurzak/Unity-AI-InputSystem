@@ -12,11 +12,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.Json;
-using com.IvanMurzak.McpPlugin.Common.Model;
 using NUnit.Framework;
 using UnityEditor;
-using UnityEngine;
 
 namespace com.IvanMurzak.Unity.MCP.InputSystem.Editor.Tests
 {
@@ -50,31 +47,6 @@ namespace com.IvanMurzak.Unity.MCP.InputSystem.Editor.Tests
             if (AssetDatabase.IsValidFolder(TestFolder))
                 AssetDatabase.DeleteAsset(TestFolder);
             AssetDatabase.Refresh();
-        }
-
-        protected virtual ResponseData<ResponseCallTool> RunToolAllowWarnings(string toolName, string json)
-        {
-            var reflector = UnityMcpPluginEditor.Instance.Reflector ?? throw new Exception("Reflector not available.");
-
-            Debug.Log($"{toolName} Started with JSON:\n{json}");
-
-            var parameters = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(json);
-            var request = new RequestCallTool(toolName, parameters!);
-            var task = UnityMcpPluginEditor.Instance.Tools!.RunCallTool(request);
-            var result = task.Result;
-
-            Debug.Log($"{toolName} Completed");
-
-            var jsonResult = result.ToJson(reflector);
-            Debug.Log($"{toolName} Result:\n{jsonResult}");
-
-            Assert.IsFalse(result.Status == ResponseStatus.Error, $"Tool call failed with error status: {result.Message}");
-            Assert.IsNotNull(result.Message, "Tool call returned null message");
-            Assert.IsFalse(result.Message!.Contains("[Error]"), $"Tool call failed with error: {result.Message}");
-            Assert.IsNotNull(result.Value, "Tool call returned null value");
-            Assert.IsFalse(jsonResult!.Contains("[Error]"), $"Tool call failed with error in JSON: {jsonResult}");
-
-            return result;
         }
     }
 }

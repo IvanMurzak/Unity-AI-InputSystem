@@ -67,8 +67,7 @@ namespace com.IvanMurzak.Unity.MCP.Editor.API
                 if (!string.IsNullOrEmpty(initialActionMap))
                     asset.AddActionMap(initialActionMap!);
 
-                var json = asset.ToJson();
-                File.WriteAllText(normalized, json);
+                File.WriteAllText(normalized, ToSafeJson(asset));
                 AssetDatabase.ImportAsset(normalized, ImportAssetOptions.ForceUpdate);
                 AssetDatabase.SaveAssets();
 

@@ -11,6 +11,7 @@ using System;
 using System.ComponentModel;
 using com.IvanMurzak.McpPlugin;
 using com.IvanMurzak.ReflectorNet.Utils;
+using UnityEngine.InputSystem;
 
 namespace com.IvanMurzak.Unity.MCP.Editor.API
 {

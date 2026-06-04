@@ -73,11 +73,22 @@ namespace com.IvanMurzak.Unity.MCP.Editor.API
             if (string.IsNullOrEmpty(path))
                 throw new Exception("[Error] The InputActionAsset is not backed by a file on disk; cannot save.");
 
-            var json = asset.ToJson();
-            File.WriteAllText(path, json);
+            File.WriteAllText(path, ToSafeJson(asset));
             EditorUtility.SetDirty(asset);
             AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
             AssetDatabase.SaveAssets();
+        }
+
+        /// <summary>
+        /// Serialize an InputActionAsset to JSON, guarding the InputSystem 1.x bug where
+        /// <c>ToJson()</c> throws inside <c>WriteFileJson.FromMaps</c> when the asset has no
+        /// ActionMaps (its internal map array is null). Emits minimal valid JSON in that case.
+        /// </summary>
+        static string ToSafeJson(InputActionAsset asset)
+        {
+            if (asset.actionMaps.Count == 0)
+                return "{\n    \"name\": \"" + asset.name + "\",\n    \"maps\": [],\n    \"controlSchemes\": []\n}";
+            return asset.ToJson();
         }
     }
 }

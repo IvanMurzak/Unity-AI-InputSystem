@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.ivanmurzak.unity.mcp.inputsystem": "file:./../../../Unity-Package/Assets/root",
+    "com.ivanmurzak.unity.mcp.inputsystem": "file:./../../../Unity-Package/Packages/com.ivanmurzak.unity.mcp.inputsystem",
     "com.unity.inputsystem": "1.7.0",
     "com.unity.feature.development": "1.0.2",
     "com.unity.test-framework": "1.3.9",

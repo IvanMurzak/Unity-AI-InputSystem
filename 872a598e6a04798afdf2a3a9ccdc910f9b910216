@@ -1,0 +1,27 @@
+Unity-Package/Assets/root/Tests/Editor/BaseTest.cs
+  s_6908d424636975::t_b22b6ae8c423c4 1-80
+Unity-Package/Assets/root/Tests/Editor/TestInputSystemLifecycle.cs
+  s_6908d424636975::t_7a63c5986941d3 1-131
+Unity-Package/Assets/root/Tests/Editor/com.IvanMurzak.Unity.MCP.InputSystem.Editor.Tests.asmdef
+  s_6908d424636975::t_2f5c2e55dac857 9-12,28-29,33-34,38
+Unity-Package/Assets/root/Tests/Editor/TestInputSystemGeneric.cs
+  s_6908d424636975::t_da9a1db80fbeac 1-73
+Unity-Package/Assets/root/Tests/Runtime/com.IvanMurzak.Unity.MCP.InputSystem.Tests.asmdef
+  s_6908d424636975::t_d2fcc13a99a92c 26-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "872a598e6a04798afdf2a3a9ccdc910f9b910216",
+  "prompts": {},
+  "sessions": {
+    "s_6908d424636975": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "383d28d1-a361-40a7-9656-23c1b29d7a19",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Ivan Murzak <ivandmurzak@gmail.com>"
+    }
+  }
+}

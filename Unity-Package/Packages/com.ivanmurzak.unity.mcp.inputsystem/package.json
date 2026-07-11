@@ -14,11 +14,11 @@
         "MCP",
         "Unity MCP"
     ],
-    "version": "1.0.10",
+    "version": "1.0.11",
     "unity": "2022.3",
     "description": "MCP Tools for the Unity Input System - Enhance your Unity projects with AI-powered Input System tools using the MCP framework. Create InputActionAssets, manage ActionMaps, Actions, Bindings (including composites), control schemes, paths, groups, interactions and processors via natural language.",
     "dependencies": {
-        "com.ivanmurzak.unity.mcp": "0.82.4",
+        "com.ivanmurzak.unity.mcp": "0.83.1",
         "com.unity.inputsystem": "1.7.0"
     },
     "scopedRegistries": [

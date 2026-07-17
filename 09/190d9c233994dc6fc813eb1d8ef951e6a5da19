@@ -1,0 +1,31 @@
+Unity-Tests/2022.3.62f3/ProjectSettings/PackageManagerSettings.asset
+  s_9284ad4c8de2f4::t_f7c60086147df7 43-44
+Unity-Tests/2023.2.22f1/ProjectSettings/PackageManagerSettings.asset
+  s_9284ad4c8de2f4::t_aa12ac40170b81 44-45
+Unity-Tests/6000.3.1f1/ProjectSettings/ProjectSettings.asset
+  s_f7f7392a09f46e::t_271214e61ee3ce 947
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "09190d9c233994dc6fc813eb1d8ef951e6a5da19",
+  "prompts": {},
+  "sessions": {
+    "s_9284ad4c8de2f4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "64f4c13c-1681-4443-9cc9-81bbde69cd56",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Ivan Murzak <Ivan.D.Murzak@gmail.com>"
+    },
+    "s_f7f7392a09f46e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d6d5d57f-6526-4873-9255-59c34d4f8571",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Ivan Murzak <Ivan.D.Murzak@gmail.com>"
+    }
+  }
+}

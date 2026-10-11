@@ -46,14 +46,13 @@ maintainer-applied `ci-ok` label and abort if the PR touches `.github/workflows/
 
 - **Main thread only.** Every Unity API call inside a tool MUST be wrapped in
   `MainThread.Instance.Run(() => { ... })` — MCP calls arrive off the main thread; only argument validation
-  runs outside. ReflectorNet calls (`reflector.Serialize`, `TryModify`) touch Unity objects and must run
-  inside it too.
+  runs outside. So must ReflectorNet calls (`reflector.Serialize`, `TryModify`).
 - **Tool shape.** One `[AiToolType] partial class Tool_InputSystem`, split one operation per file
   (`InputSystem.AssetCreate.cs`, `InputSystem.BindingAdd.cs`, `InputSystem.Modify.cs`, …). Each tool method
-  carries `[AiTool(<id>, Title=…, …Hint=…)]`, `[AiSkillDescription]` / `[AiSkillBody]` (LLM-facing skill copy)
-  and `[Description]` (parameter/return docs); tool IDs are `public const string …ToolId = "inputsystem-…"`.
-  Shared helpers (`LoadAsset`, `GetActionMap`, `GetAction`, `SaveAsset`) live in `InputSystem.Helpers.cs`;
-  error strings in `Tool_InputSystem.Error` (`InputSystem.cs`).
+  carries `[AiTool(<id>, Title=…, …Hint=…)]`, `[AiSkillDescription]` / `[AiSkillBody]` and `[Description]`
+  (all LLM-facing); tool IDs are `public const string …ToolId = "inputsystem-…"`. Shared helpers (`LoadAsset`,
+  `GetActionMap`, `GetAction`, `SaveAsset`) live in `InputSystem.Helpers.cs`; error strings in
+  `Tool_InputSystem.Error` (`InputSystem.cs`).
 - **Asset-backed.** Tools edit `.inputactions` `InputActionAsset`s (`Assets/`-rooted paths) and every mutation
   persists through `SaveAsset` (writes JSON, re-imports). Serialize with `ToSafeJson`, never raw `ToJson()`:
   Input System 1.x throws on an asset with no action maps.

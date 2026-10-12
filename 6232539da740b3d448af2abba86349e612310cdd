@@ -1,0 +1,59 @@
+Unity-Package/Assets/Plugins/NuGet/.nuget-installed.json
+  s_9284ad4c8de2f4::t_d935fc71f962ed 4,10,16
+Unity-Package/Assets/Plugins/NuGet/McpPlugin.Common.dll.meta
+  s_9284ad4c8de2f4::t_e80cb3a71bfc6e 14-19,28
+Unity-Package/Assets/Plugins/NuGet/McpPlugin.dll.meta
+  s_9284ad4c8de2f4::t_32636b4a4723d5 14-19,28
+Unity-Package/Assets/Plugins/NuGet/Microsoft.Extensions.DependencyInjection.Abstractions.dll.meta
+  s_9284ad4c8de2f4::t_a6a73fe7e303f7 14-19,28
+Unity-Package/Assets/Plugins/NuGet/Microsoft.Extensions.Logging.Abstractions.dll.meta
+  s_9284ad4c8de2f4::t_a14a301c13b9ab 14-19,28
+Unity-Package/Assets/Plugins/NuGet/System.Runtime.CompilerServices.Unsafe.dll.meta
+  s_9284ad4c8de2f4::t_6a43069ad37a0c 14-19,28
+Unity-Package/Packages/packages-lock.json
+  s_9284ad4c8de2f4::t_b751e83dc52f96 5,14-22,25,31-32,41,52
+Unity-Tests/2022.3.62f3/Assets/Plugins/NuGet/.nuget-installed.json
+  s_f7f7392a09f46e::t_ab771610ed3693 4,10,16
+Unity-Tests/2022.3.62f3/Assets/Plugins/NuGet/McpPlugin.Common.dll.meta
+  s_f7f7392a09f46e::t_04da97ead58648 14-19,28
+Unity-Tests/2022.3.62f3/Assets/Plugins/NuGet/McpPlugin.dll.meta
+  s_f7f7392a09f46e::t_c4d82b11be8484 14-19,28
+Unity-Tests/2022.3.62f3/Assets/Plugins/NuGet/Microsoft.Extensions.DependencyInjection.Abstractions.dll.meta
+  s_f7f7392a09f46e::t_a760f9b61aaf9f 14-19,28
+Unity-Tests/2022.3.62f3/Assets/Plugins/NuGet/Microsoft.Extensions.Logging.Abstractions.dll.meta
+  s_f7f7392a09f46e::t_366fab525baad1 14-19,28
+Unity-Tests/2022.3.62f3/Assets/Plugins/NuGet/System.Runtime.CompilerServices.Unsafe.dll.meta
+  s_f7f7392a09f46e::t_5b0ee481160f38 14-19,28
+Unity-Tests/2023.2.22f1/Assets/Plugins/NuGet/.nuget-installed.json
+  s_f7f7392a09f46e::t_e97e55534f9a76 4,10,16
+Unity-Tests/2023.2.22f1/Packages/packages-lock.json
+  s_9284ad4c8de2f4::t_1f1cb9bf2a5b97 4,19
+Unity-Tests/6000.3.1f1/Assets/Plugins/NuGet/.nuget-installed.json
+  s_f7f7392a09f46e::t_c1de1d92193ba1 4,10,16
+Unity-Tests/6000.3.1f1/Packages/packages-lock.json
+  s_f7f7392a09f46e::t_837315420f61ce 4,19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "6232539da740b3d448af2abba86349e612310cdd",
+  "prompts": {},
+  "sessions": {
+    "s_9284ad4c8de2f4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "64f4c13c-1681-4443-9cc9-81bbde69cd56",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Ivan Murzak <Ivan.D.Murzak@gmail.com>"
+    },
+    "s_f7f7392a09f46e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d6d5d57f-6526-4873-9255-59c34d4f8571",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Ivan Murzak <Ivan.D.Murzak@gmail.com>"
+    }
+  }
+}

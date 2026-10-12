@@ -1,0 +1,25 @@
+Unity-Package/Assets/Plugins/NuGet/.nuget-installed.json
+  s_ed1b4ae4e5d986::t_79ff91e0365e38 4,10
+Unity-Tests/2022.3.62f3/Assets/Plugins/NuGet/.nuget-installed.json
+  s_ed1b4ae4e5d986::t_7f8ee84c3e2378 4,10
+Unity-Tests/2023.2.22f1/Assets/Plugins/NuGet/.nuget-installed.json
+  s_ed1b4ae4e5d986::t_c3c52eb24f911d 4,10
+Unity-Tests/6000.3.1f1/Assets/Plugins/NuGet/.nuget-installed.json
+  s_ed1b4ae4e5d986::t_b33f854c9b294d 4,10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "de2f34e2246bda18ab0a54a0ca2ae59de11a19dc",
+  "prompts": {},
+  "sessions": {
+    "s_ed1b4ae4e5d986": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d065bda2-94f7-45db-b8f4-2da50c81020b",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Ivan Murzak <Ivan.D.Murzak@gmail.com>"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+"Installer/Assets/com.IvanMurzak/AI InputSystem Installer/Installer.cs"
+  s_cb41aadbde3305::t_a47d52551d563a 22
+Unity-Package/Packages/com.ivanmurzak.unity.mcp.inputsystem/package.json
+  s_cb41aadbde3305::t_c19001ca9e21ed 17,21
+Unity-Package/Packages/packages-lock.json
+  s_cb41aadbde3305::t_733ebc5e8ad398 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.12",
+  "base_commit_sha": "a47b549fb929609c11558eb6c65dde4a8004065b",
+  "prompts": {},
+  "sessions": {
+    "s_cb41aadbde3305": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e52f295f-a887-4d28-a18e-567076052857",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Ivan Murzak <Ivan.D.Murzak@gmail.com>"
+    }
+  }
+}

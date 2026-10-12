@@ -1,0 +1,24 @@
+Unity-Package/Assets/root/Editor/Scripts/Tools/InputSystem.AssetCreate.cs
+  s_6908d424636975::t_1408fa90ca0937 70
+Unity-Package/Assets/root/Editor/Scripts/Tools/InputSystem.Helpers.cs
+  s_6908d424636975::t_e0c565065582f2 76
+  s_6908d424636975::t_a00e5dd4846620 81-92
+Unity-Package/Assets/root/Editor/Scripts/Tools/InputSystem.ActionMapRemove.cs
+  s_6908d424636975::t_39a3787b3bf807 14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "55a35902790ee5b6f1bb68c15210ae5561b023b0",
+  "prompts": {},
+  "sessions": {
+    "s_6908d424636975": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "383d28d1-a361-40a7-9656-23c1b29d7a19",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Ivan Murzak <ivandmurzak@gmail.com>"
+    }
+  }
+}

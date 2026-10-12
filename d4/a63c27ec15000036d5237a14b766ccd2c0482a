@@ -1,0 +1,51 @@
+"Installer/Assets/com.IvanMurzak/AI InputSystem Installer/Installer.cs"
+  s_f593e7fa05bb4b::t_07cce71303266c 22
+Unity-Package/Assets/Plugins/NuGet/.nuget-installed.json
+  s_f593e7fa05bb4b::t_716fc7836dc716 4,10
+Unity-Package/Packages/com.ivanmurzak.unity.mcp.inputsystem/package.json
+  s_f593e7fa05bb4b::t_614ed5fa2a46be 17,21
+Unity-Package/Packages/packages-lock.json
+  s_f593e7fa05bb4b::t_cb94478e6cc967 4,19
+Unity-Package/ProjectSettings/ProjectSettings.asset
+  s_f593e7fa05bb4b::t_10e81da53786c7 665-682
+Unity-Tests/2022.3.62f3/Assets/Plugins/NuGet/.nuget-installed.json
+  s_f593e7fa05bb4b::t_d7fca848ebd004 4,10
+Unity-Tests/2022.3.62f3/Packages/packages-lock.json
+  s_f593e7fa05bb4b::t_076c6f1f8b2694 4,19
+Unity-Tests/2022.3.62f3/ProjectSettings/ProjectSettings.asset
+  s_f593e7fa05bb4b::t_373b0df05c0d13 747-764
+Unity-Tests/2023.2.22f1/Assets/Plugins/NuGet/.nuget-installed.json
+  s_f593e7fa05bb4b::t_70253e8ae26207 4,10
+Unity-Tests/2023.2.22f1/Packages/packages-lock.json
+  s_f593e7fa05bb4b::t_2463d891fca0a2 4,19
+Unity-Tests/2023.2.22f1/ProjectSettings/ProjectSettings.asset
+  s_f593e7fa05bb4b::t_0ec4be6ba23f01 656-672
+Unity-Tests/6000.3.1f1/Assets/Plugins/NuGet/.nuget-installed.json
+  s_f593e7fa05bb4b::t_d0fda493f9131e 4,10
+Unity-Tests/6000.3.1f1/Packages/packages-lock.json
+  s_f593e7fa05bb4b::t_2e36ffe2212224 4,19
+Unity-Tests/6000.3.1f1/ProjectSettings/ProjectSettings.asset
+  s_f593e7fa05bb4b::t_74f2180439ecc9 832-850
+Unity-Tests/6000.6.3f1/Assets/Plugins/NuGet/.nuget-installed.json
+  s_f593e7fa05bb4b::t_4079bd90c8c178 4,10
+Unity-Tests/6000.6.3f1/Packages/packages-lock.json
+  s_f593e7fa05bb4b::t_443dcbdff09445 4,19
+Unity-Tests/6000.6.3f1/ProjectSettings/ProjectSettings.asset
+  s_f593e7fa05bb4b::t_dfc8e32708b604 593-611
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d4a63c27ec15000036d5237a14b766ccd2c0482a",
+  "prompts": {},
+  "sessions": {
+    "s_f593e7fa05bb4b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ea515913-4e3a-4132-812b-63654f40f578",
+        "model": "unknown"
+      },
+      "human_author": "Ivan Murzak <Ivan.D.Murzak@gmail.com>"
+    }
+  }
+}

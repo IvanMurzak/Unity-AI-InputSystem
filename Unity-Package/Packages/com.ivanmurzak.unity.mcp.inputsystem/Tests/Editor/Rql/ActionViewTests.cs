@@ -9,15 +9,19 @@
 */
 
 #nullable enable
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using com.IvanMurzak.Unity.MCP.Editor.Rql;
 using com.IvanMurzak.Unity.MCP.Editor.Rql.InputSystem;
 using NUnit.Framework;
 
 namespace com.IvanMurzak.Unity.MCP.Editor.Tests.Rql.InputSystem
 {
     using InputActionType = UnityEngine.InputSystem.InputActionType;
+    using Setup = UnityEngine.InputSystem.InputActionSetupExtensions;
 
     public class ActionViewTests : InputSystemTestBase
     {
@@ -90,6 +94,31 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Tests.Rql.InputSystem
             Assert.IsEmpty(pending);
             using var saved = FromFile();
             Assert.AreEqual(saved.Asset.FindAction("Player/Jump", true).type, Asset.FindAction("Player/Jump", true).type);
+        }
+
+        [Test]
+        public void AFailedDeferredEditKeepsTheFileUntouched()
+        {
+            // Inside a mutation a failed edit restores the earlier deferred edits in memory only: writing them to the file
+            // would persist a set the engine then rolls back (Discard re-imports the file).
+            var before = File.ReadAllText(P);
+            var mutating = typeof(RqlUnity).GetField("_mutating", BindingFlags.NonPublic | BindingFlags.Static)!;
+            mutating.SetValue(null, 1);
+            try
+            {
+                InputAssetStore.Edit(Asset, "first", () => Setup.AddActionMap(Asset, "Deferred"));
+                Assert.Throws<InvalidOperationException>(() =>
+                    InputAssetStore.Edit(Asset, "second", () => throw new InvalidOperationException("boom")));
+                Assert.IsNotNull(Asset.FindActionMap("Deferred"), "the snapshot keeps the earlier deferred edit in memory");
+                Assert.AreEqual(before, File.ReadAllText(P), "a failed deferred edit wrote the file");
+            }
+            finally
+            {
+                mutating.SetValue(null, 0);
+                typeof(InputAssetStore).GetMethod("Discard", BindingFlags.NonPublic | BindingFlags.Static)!.Invoke(null, null);
+            }
+            Assert.IsNull(Asset.FindActionMap("Deferred"));
+            Assert.AreEqual(before, File.ReadAllText(P));
         }
 
         [Test]

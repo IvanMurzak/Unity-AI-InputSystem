@@ -10,6 +10,7 @@
 
 #nullable enable
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 using UnityEditor;
 
@@ -43,6 +44,22 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Tests.Rql.InputSystem
             Assert.AreEqual(0, asset.actionMaps.Count);
             Ok($"unity.asset(\"{path}\") | call AddMap(\"Player\")");
             using (var saved = FromFile(path)) Assert.AreEqual("Player", saved.Asset.actionMaps[0].name);
+        }
+
+        [Test]
+        public void ControlSchemesPersistInAnAssetWithoutMaps()
+        {
+            const string path = Folder + "/Schemes.inputactions";
+            Ok($"input | call CreateAsset(\"{path}\")");
+            Ok($"unity.asset(\"{path}\") | call AddControlScheme(\"Gamepad\", [\"<Gamepad>\"])");
+            using (var saved = FromFile(path)) Assert.AreEqual("Gamepad", saved.Asset.controlSchemes.Single().name);
+
+            Ok(A + " | get maps | call Remove()");
+            using (var saved = FromFile())
+            {
+                Assert.AreEqual(0, saved.Asset.actionMaps.Count);
+                Assert.AreEqual(2, saved.Asset.controlSchemes.Count);
+            }
         }
 
         [Test]

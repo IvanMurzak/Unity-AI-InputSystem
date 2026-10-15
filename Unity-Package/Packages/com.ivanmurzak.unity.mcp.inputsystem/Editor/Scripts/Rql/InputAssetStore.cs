@@ -78,8 +78,9 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Rql.InputSystem
             }
             catch
             {
-                // A half-applied change must not stay in memory: re-import restores the file (or the snapshot) state.
-                if (before != null) Write(AssetDatabase.GetAssetPath(asset), before);
+                // A half-applied change must not stay in memory: re-import restores the file state; a deferred edit
+                // restores the snapshot in memory only, so the file stays untouched until Flush (or Discard re-imports it).
+                if (before != null) asset.LoadFromJson(before);
                 else Revert(asset);
                 throw;
             }
@@ -168,12 +169,11 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Rql.InputSystem
 
         /// <summary>
         /// The asset as <c>.inputactions</c> JSON. Guards the Input System 1.x bug where ToJson() throws for an asset without
-        /// action maps (its map array is null).
+        /// action maps (its map array is null): an empty array serializes the same and keeps the control schemes.
         /// </summary>
         public static string ToJson(InputActionAsset asset)
         {
-            if (asset.actionMaps.Count == 0)
-                return "{\n    \"name\": \"" + asset.name.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\",\n    \"maps\": [],\n    \"controlSchemes\": []\n}";
+            if (GetField(asset, "m_ActionMaps") == null) SetField(asset, "m_ActionMaps", Array.Empty<UnityEngine.InputSystem.InputActionMap>());
             return asset.ToJson();
         }
 

@@ -55,17 +55,17 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Rql.InputSystem
         {
             if (asset == null) throw new InvalidOperationException("the InputActionAsset no longer exists");
             var path = AssetDatabase.GetAssetPath(asset);
-            if (!RqlUnity.InMutation || !IsInputActionsFile(path))
+            var deferred = RqlUnity.InMutation && IsInputActionsFile(path);
+            // Deferred: earlier edits of this mutation are only in memory, so a failed change restores this snapshot
+            // instead of the file.
+            var before = deferred && Pending.Contains(path) ? ToJson(asset) : null;
+            Undo.RecordObject(asset, "RQL input: " + label);
+            if (!deferred)
             {
-                Undo.RecordObject(asset, "RQL input: " + label);
                 Apply(asset, change);
                 Save(asset);
                 return;
             }
-            // Deferred: earlier edits of this mutation are only in memory, so a failed change restores this snapshot
-            // instead of the file.
-            var before = Pending.Contains(path) ? ToJson(asset) : null;
-            Undo.RecordObject(asset, "RQL input: " + label);
             Apply(asset, () => { change(); Validate(ToJson(asset)); }, before);
             Pending.Add(path);
         }
@@ -146,6 +146,7 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Rql.InputSystem
         {
             path = NewAssetPath(path);
             var asset = ScriptableObject.CreateInstance<InputActionAsset>();
+            string json;
             try
             {
                 asset.name = Path.GetFileNameWithoutExtension(path);
@@ -154,14 +155,13 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Rql.InputSystem
                     InputValidation.Name(map, "action map");
                     UnityEngine.InputSystem.InputActionSetupExtensions.AddActionMap(asset, map!);
                 }
-                File.WriteAllText(path, ToJson(asset));
+                json = ToJson(asset);
             }
             finally
             {
                 UnityEngine.Object.DestroyImmediate(asset);
             }
-            Track(path);
-            AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
+            Write(path, json);
             return AssetDatabase.LoadAssetAtPath<InputActionAsset>(path)
                 ?? throw new InvalidOperationException($"'{path}' was written but did not import as an InputActionAsset");
         }
@@ -213,9 +213,7 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Rql.InputSystem
                 string json;
                 try { json = ToJson(asset); }
                 catch (Exception ex) { Debug.LogWarning($"[RQL] could not write '{path}' after undo: {ex.Message}"); continue; }
-                if (json == File.ReadAllText(path)) continue;
-                File.WriteAllText(path, json);
-                AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
+                if (json != File.ReadAllText(path)) Write(path, json);
             }
         }
 
@@ -240,17 +238,8 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Rql.InputSystem
             if (!path.EndsWith(Extension, StringComparison.OrdinalIgnoreCase)) throw new ArgumentException($"'{path}' must end with {Extension}");
             if (AssetDatabase.LoadMainAssetAtPath(path) != null || File.Exists(path))
                 throw new ArgumentException($"an asset already exists at '{path}' (choose another path)");
-            EnsureFolder(Path.GetDirectoryName(path)?.Replace('\\', '/'));
+            RqlEditorApi.Instance.CreateFolder(Path.GetDirectoryName(path)!);
             return path;
-        }
-
-        private static void EnsureFolder(string? path)
-        {
-            if (string.IsNullOrEmpty(path) || AssetDatabase.IsValidFolder(path)) return;
-            var parent = Path.GetDirectoryName(path)?.Replace('\\', '/');
-            if (string.IsNullOrEmpty(parent)) throw new ArgumentException($"'{path}' is not under Assets/");
-            EnsureFolder(parent);
-            AssetDatabase.CreateFolder(parent, Path.GetFileName(path));
         }
 
         // ------------------------------------------------------------ serialized fields without a public setter
@@ -260,18 +249,12 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Rql.InputSystem
         /// m_Processors, InputActionMap.m_Name, InputActionAsset.m_ControlSchemes). These names are the .inputactions
         /// serialization format, so they are stable; a missing field fails loudly instead of silently doing nothing.
         /// </summary>
-        public static void SetField(object target, string field, object? value)
-        {
-            var info = target.GetType().GetField(field, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-                ?? throw new MissingFieldException(target.GetType().FullName, field);
-            info.SetValue(target, value);
-        }
+        public static void SetField(object target, string field, object? value) => Field(target, field).SetValue(target, value);
 
-        public static object? GetField(object target, string field)
-        {
-            var info = target.GetType().GetField(field, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-                ?? throw new MissingFieldException(target.GetType().FullName, field);
-            return info.GetValue(target);
-        }
+        public static object? GetField(object target, string field) => Field(target, field).GetValue(target);
+
+        private static FieldInfo Field(object target, string field) =>
+            target.GetType().GetField(field, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+            ?? throw new MissingFieldException(target.GetType().FullName, field);
     }
 }

@@ -40,6 +40,14 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Rql.InputSystem
             return name;
         }
 
+        /// <summary>A control scheme name: a valid name without ';' (it separates binding groups).</summary>
+        public static string SchemeName(string? name)
+        {
+            Name(name, "control scheme");
+            if (name!.Contains(';')) throw new ArgumentException($"control scheme name '{name}' must not contain ';' (it separates binding groups)");
+            return name;
+        }
+
         public static void UniqueName(IEnumerable<string> existing, string name, string what, string where)
         {
             if (existing.Any(n => string.Equals(n, name, StringComparison.OrdinalIgnoreCase)))

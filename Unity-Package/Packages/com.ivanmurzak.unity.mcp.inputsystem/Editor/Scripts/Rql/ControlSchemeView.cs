@@ -63,8 +63,7 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Rql.InputSystem
             {
                 var scheme = Scheme;
                 if (scheme.name == value) return;
-                InputValidation.Name(value, "control scheme");
-                if (value.Contains(';')) throw new ArgumentException($"control scheme name '{value}' must not contain ';' (it separates binding groups)");
+                InputValidation.SchemeName(value);
                 InputValidation.UniqueName(asset.controlSchemes.Where(s => s.name != scheme.name).Select(s => s.name), value, "control scheme", asset.name);
                 var oldGroup = scheme.bindingGroup;
                 bool renameGroup = string.Equals(oldGroup, scheme.name, StringComparison.Ordinal);

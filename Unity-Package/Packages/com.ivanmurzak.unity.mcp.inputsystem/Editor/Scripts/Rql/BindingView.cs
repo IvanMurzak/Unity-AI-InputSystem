@@ -58,23 +58,18 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Rql.InputSystem
 
         private int IndexIn(InputAction action)
         {
-            if (_id == Guid.Empty)
-            {
-                if (_fallbackIndex < action.bindings.Count) return _fallbackIndex;
-            }
-            else
-            {
-                for (int i = 0; i < action.bindings.Count; i++)
-                    if (action.bindings[i].id == _id) return i;
-            }
-            throw new InvalidOperationException($"binding {(_id == Guid.Empty ? "#" + _fallbackIndex : _id.ToString())} no longer exists on action '{action.name}'");
+            int i = IndexOf(action);
+            return i >= 0 ? i : throw new InvalidOperationException(
+                $"binding {(_id == Guid.Empty ? "#" + _fallbackIndex : _id.ToString())} no longer exists on action '{action.name}'");
         }
 
-        private bool Contains(InputAction action)
+        // -1 when the binding is gone.
+        private int IndexOf(InputAction action)
         {
+            if (_id == Guid.Empty) return _fallbackIndex < action.bindings.Count ? _fallbackIndex : -1;
             for (int i = 0; i < action.bindings.Count; i++)
-                if (action.bindings[i].id == _id) return true;
-            return false;
+                if (action.bindings[i].id == _id) return i;
+            return -1;
         }
 
         private InputBinding Binding
@@ -183,7 +178,7 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Rql.InputSystem
         {
             var action = Action;
             // A part whose composite was removed earlier in the same call stage is already gone.
-            if (_id != Guid.Empty && !Contains(action)) return action.bindings.Count;
+            if (_id != Guid.Empty && IndexOf(action) < 0) return action.bindings.Count;
             int i = IndexIn(action);
             InputAssetStore.Edit(asset, "remove binding", () => Setup.ChangeBinding(action, i).Erase());
             return Action.bindings.Count;
@@ -202,8 +197,9 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Rql.InputSystem
         {
             try
             {
-                var b = Binding;
-                return $"binding {action}#{index} {b.path}";
+                var a = Action;
+                int i = IndexIn(a);
+                return $"binding {a.actionMap?.name}/{a.name}#{i} {a.bindings[i].path}";
             }
             catch (InvalidOperationException)
             {

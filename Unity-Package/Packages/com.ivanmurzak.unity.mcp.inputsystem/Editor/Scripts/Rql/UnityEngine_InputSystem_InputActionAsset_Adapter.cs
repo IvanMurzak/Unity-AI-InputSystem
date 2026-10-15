@@ -79,8 +79,7 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Rql.InputSystem
 
         internal static ControlSchemeView AddControlScheme(InputActionAsset asset, string name, List<string>? required, List<string>? optional, string? bindingGroup)
         {
-            InputValidation.Name(name, "control scheme");
-            if (name.Contains(';')) throw new ArgumentException($"control scheme name '{name}' must not contain ';' (it separates binding groups)");
+            InputValidation.SchemeName(name);
             InputValidation.UniqueName(asset.controlSchemes.Select(s => s.name), name, "control scheme", asset.name);
             bindingGroup = string.IsNullOrWhiteSpace(bindingGroup) ? name : bindingGroup;
             if (bindingGroup!.Contains(';')) throw new ArgumentException($"binding group '{bindingGroup}' must not contain ';'");

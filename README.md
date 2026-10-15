@@ -33,34 +33,23 @@ AI-powered tools for the Unity [Input System](https://docs.unity3d.com/Packages/
 | 2023.2.22f1   | [![r](https://github.com/IvanMurzak/Unity-AI-InputSystem/workflows/release/badge.svg?job=test-unity-2023-2-22f1-editmode)](https://github.com/IvanMurzak/Unity-AI-InputSystem/actions/workflows/release.yml)       | [![r](https://github.com/IvanMurzak/Unity-AI-InputSystem/workflows/release/badge.svg?job=test-unity-2023-2-22f1-playmode)](https://github.com/IvanMurzak/Unity-AI-InputSystem/actions/workflows/release.yml)       | [![r](https://github.com/IvanMurzak/Unity-AI-InputSystem/workflows/release/badge.svg?job=test-unity-2023-2-22f1-standalone)](https://github.com/IvanMurzak/Unity-AI-InputSystem/actions/workflows/release.yml)       |
 | 6000.3.1f1    | [![r](https://github.com/IvanMurzak/Unity-AI-InputSystem/workflows/release/badge.svg?job=test-unity-6000-3-1f1-editmode)](https://github.com/IvanMurzak/Unity-AI-InputSystem/actions/workflows/release.yml)        | [![r](https://github.com/IvanMurzak/Unity-AI-InputSystem/workflows/release/badge.svg?job=test-unity-6000-3-1f1-playmode)](https://github.com/IvanMurzak/Unity-AI-InputSystem/actions/workflows/release.yml)        | [![r](https://github.com/IvanMurzak/Unity-AI-InputSystem/workflows/release/badge.svg?job=test-unity-6000-3-1f1-standalone)](https://github.com/IvanMurzak/Unity-AI-InputSystem/actions/workflows/release.yml)        |
 
-## AI InputSystem Tools
+## RQL (no extension tools)
 
-13 tools, grouped by purpose:
+On the RQL branch of Unity-MCP this package adds no MCP tools: it contributes an RQL module, so agents use
+`rql-query` / `rql-mutate` (the `unity-rql` skill carries the full guide with examples). `A` below stands for
+`unity.asset("Assets/Input/Player.inputactions")`; every change is validated, written to the `.inputactions` file and undoable.
 
-### Asset lifecycle
-
-- `inputsystem-asset-create` - Create a new `InputActionAsset` at a project path
-- `inputsystem-get` - Get the structure of an `InputActionAsset` (action maps, actions, bindings, control schemes)
-- `inputsystem-save` - Save the `InputActionAsset` to disk
-
-### Action maps & actions
-
-- `inputsystem-actionmap-add` - Add an action map to the asset
-- `inputsystem-actionmap-remove` - Remove an action map by name
-- `inputsystem-action-add` - Add an action (Button / Value / PassThrough) to an action map
-- `inputsystem-action-remove` - Remove an action from an action map
-
-### Bindings
-
-- `inputsystem-binding-add` - Add a simple binding (e.g. `<Keyboard>/space`) to an action
-- `inputsystem-binding-composite-add` - Add a composite binding (1D axis, 2D vector / WASD, …) to an action
-- `inputsystem-binding-set` - Set / update an existing binding's path or properties
-- `inputsystem-binding-remove` - Remove a binding from an action
-
-### Control schemes & generic
-
-- `inputsystem-controlscheme-add` - Add a control scheme (device requirements) to the asset
-- `inputsystem-modify` - Generic write: apply a `SerializedMember` diff to any Input System object via ReflectorNet (escape hatch for fields not covered by the dedicated tools)
+| Former tool | RQL |
+| --- | --- |
+| `inputsystem-asset-create` | `input \| call CreateAsset("Assets/Input/Player.inputactions", "Player")` (path, first map?) |
+| `inputsystem-get` | `input \| get assets`, `A \| get maps`, `A \| get actions \| get bindings \| select action path groups`, `A \| get controlSchemes` |
+| `inputsystem-save` | not needed: every write is saved to the file at once |
+| `inputsystem-actionmap-add` / `-remove` | `A \| call AddMap("UI")`, `A \| get maps \| where name == "UI" \| call Remove()` |
+| `inputsystem-action-add` / `-remove` | `A \| get maps \| where name == "Player" \| call AddAction("Move", "Value", "Vector2")`, `… \| get actions \| where name == "Move" \| call Remove()` |
+| `inputsystem-binding-add` / `-composite-add` | `A \| get actions \| where name == "Jump" \| call AddBinding("<Keyboard>/space", "Keyboard&Mouse")`, `call AddComposite("2DVector", {up: "<Keyboard>/w", …})` |
+| `inputsystem-binding-set` / `-remove` | `A \| get actions \| get bindings \| where path == "<Gamepad>/buttonSouth" \| set path = "<Gamepad>/buttonEast"`, `… \| call Remove()` |
+| `inputsystem-controlscheme-add` | `A \| call AddControlScheme("Gamepad", ["<Gamepad>"])`; `… \| get controlSchemes \| set name = …, requiredDevices = […]` |
+| `inputsystem-modify` | plain `set` on maps, actions (`name type expectedControlType interactions processors initialStateCheck`), bindings and schemes |
 
 ## Installation
 

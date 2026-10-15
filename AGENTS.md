@@ -1,9 +1,9 @@
 # AGENTS.md — Unity-AI-InputSystem
 
-Unity package `com.ivanmurzak.unity.mcp.inputsystem` — wraps Unity's **Input System**
-(`com.unity.inputsystem`) as `inputsystem-*` MCP tools: create `InputActionAsset`s, add/remove action maps,
-actions and bindings, build composite bindings, define control schemes, save assets, and modify arbitrary
-input-asset fields. An extension of [AI Game Developer](https://github.com/IvanMurzak/Unity-MCP)
+Unity package `com.ivanmurzak.unity.mcp.inputsystem` — makes Unity's **Input System** (`com.unity.inputsystem`)
+available to Unity-MCP's RQL tools (`rql-query` / `rql-mutate`; no extension MCP tools): the `input` source
+(assets, layouts, interactions, processors, `CreateAsset`), and InputActionAsset maps / actions / bindings / control
+schemes as writable views with add / remove methods. An extension of [AI Game Developer](https://github.com/IvanMurzak/Unity-MCP)
 (`com.ivanmurzak.unity.mcp`), generated from `Unity-AI-Tools-Template`; the user-facing tool list is in
 `README.md`.
 
@@ -46,9 +46,6 @@ maintainer-applied `ci-ok` label and abort if the PR touches `.github/workflows/
 
 ## Critical invariants
 
-- **Main thread only.** Every Unity API call inside a tool MUST be wrapped in
-  `MainThread.Instance.Run(() => { ... })` — MCP calls arrive off the main thread; only argument validation
-  runs outside. So must ReflectorNet calls (`reflector.Serialize`, `TryModify`).
 - **RQL shape (branch `experiment/rql`).** Agents use Unity-MCP's `rql-query` / `rql-mutate`; no `inputsystem-*`
   tools remain. Assets and their parts are views addressed by id (`ActionMapView`, `ActionView`, `BindingView`;
   `ControlSchemeView` by name) because a re-import replaces the map / action objects. Validation lives in

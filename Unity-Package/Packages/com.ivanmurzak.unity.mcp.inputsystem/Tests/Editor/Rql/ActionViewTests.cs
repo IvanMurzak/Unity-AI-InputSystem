@@ -9,7 +9,10 @@
 */
 
 #nullable enable
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using com.IvanMurzak.Unity.MCP.Editor.Rql.InputSystem;
 using NUnit.Framework;
 
 namespace com.IvanMurzak.Unity.MCP.Editor.Tests.Rql.InputSystem
@@ -75,6 +78,18 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Tests.Rql.InputSystem
         {
             Fails(Action("Jump") + " | set type = \"Value\", interactions = \"hodl\"", "rolled back");
             Assert.AreEqual(InputActionType.Button, Asset.FindAction("Player/Jump", true).type);
+        }
+
+        [Test]
+        public void AMutationThatDoesNotSaveDropsItsDeferredEdits()
+        {
+            // RqlUnity.Discarded: nothing stays queued for the next mutation's save, and the asset matches its file.
+            Fails(Action("Jump") + " | set type = \"Value\", interactions = \"hodl\"", "rolled back");
+            var pending = (HashSet<string>)typeof(InputAssetStore)
+                .GetField("Pending", BindingFlags.NonPublic | BindingFlags.Static)!.GetValue(null)!;
+            Assert.IsEmpty(pending);
+            using var saved = FromFile();
+            Assert.AreEqual(saved.Asset.FindAction("Player/Jump", true).type, Asset.FindAction("Player/Jump", true).type);
         }
 
         [Test]

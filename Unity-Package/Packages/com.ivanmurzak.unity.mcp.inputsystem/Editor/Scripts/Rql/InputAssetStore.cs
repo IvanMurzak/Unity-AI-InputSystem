@@ -27,6 +27,7 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Rql.InputSystem
     /// <see cref="Edit"/>: record the asset for Undo, change it, write <c>ToJson()</c> to the file and re-import it. Inside
     /// <see cref="RqlUnity.Mutate"/> the write is deferred to the end of the query, so a bulk edit re-imports each file once.
     /// The re-import keeps the asset object but replaces its maps and actions, which is why the views address everything by id.
+    /// A mutation that ends without saving drops the deferred edits (<see cref="Discard"/>).
     /// Undo / redo restore the in-memory asset only; <see cref="Resync"/> writes the restored state back to the file.
     /// </summary>
     [InitializeOnLoad]
@@ -42,6 +43,8 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Rql.InputSystem
             Undo.undoRedoPerformed += Resync;
             RqlUnity.Saving -= Flush;
             RqlUnity.Saving += Flush;
+            RqlUnity.Discarded -= Discard;
+            RqlUnity.Discarded += Discard;
         }
 
         // .inputactions files edited during the running mutation, written by Flush.
@@ -95,6 +98,18 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Rql.InputSystem
                 catch (Exception ex) { failed.Add($"'{path}': {ex.Message}"); }
             }
             if (failed.Count > 0) throw new InvalidOperationException("could not write " + string.Join("; ", failed));
+        }
+
+        /// <summary>
+        /// The mutation ended without saving (<see cref="RqlUnity.Discarded"/>: rolled back, a dry run, an error): drop its
+        /// deferred edits. Re-importing each file restores the in-memory asset to the file, which was never written.
+        /// </summary>
+        private static void Discard()
+        {
+            var paths = Pending.ToList();
+            Pending.Clear();
+            foreach (var path in paths)
+                if (File.Exists(path)) AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
         }
 
         private static bool IsInputActionsFile(string path) =>

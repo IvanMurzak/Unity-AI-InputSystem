@@ -1,9 +1,9 @@
 # AGENTS.md — Unity-AI-InputSystem
 
-Unity package `com.ivanmurzak.unity.mcp.inputsystem` — wraps Unity's **Input System**
-(`com.unity.inputsystem`) as `inputsystem-*` MCP tools: create `InputActionAsset`s, add/remove action maps,
-actions and bindings, build composite bindings, define control schemes, save assets, and modify arbitrary
-input-asset fields. An extension of [AI Game Developer](https://github.com/IvanMurzak/Unity-MCP)
+Unity package `com.ivanmurzak.unity.mcp.inputsystem` — makes Unity's **Input System** (`com.unity.inputsystem`)
+available to Unity-MCP's RQL tools (`rql-query` / `rql-mutate`; no extension MCP tools): the `input` source
+(assets, layouts, interactions, processors, `CreateAsset`), and InputActionAsset maps / actions / bindings / control
+schemes as writable views with add / remove methods. An extension of [AI Game Developer](https://github.com/IvanMurzak/Unity-MCP)
 (`com.ivanmurzak.unity.mcp`), generated from `Unity-AI-Tools-Template`; the user-facing tool list is in
 `README.md`.
 
@@ -12,9 +12,11 @@ input-asset fields. An extension of [AI Game Developer](https://github.com/IvanM
 - `Unity-Package/` — Unity project hosting the package; only `Packages/com.ivanmurzak.unity.mcp.inputsystem/`
   ships.
   - `package.json` — the version source of truth and the dependency pins.
-  - `Editor/Scripts/Tools/` — the MCP tools (`Tool_InputSystem`); new tools go here.
+  - `Editor/Scripts/Rql/` — branch `experiment/rql`: the `InputSystemModule` (IRqlModule: `input` source, the
+    InputActionAsset adapter, map / action / binding / control-scheme views, `InputAssetStore` persistence, the agent
+    guide); replaces the former `inputsystem-*` tools.
   - `Runtime/` — runtime assembly (currently empty).
-  - `Tests/Editor/` (EditMode, `BaseTest` + one file per tool group) and `Tests/Runtime/` (PlayMode).
+  - `Tests/Editor/Rql/` (EditMode, `InputSystemTestBase` + one file per adapter / view / source) and `Tests/Runtime/` (PlayMode).
 - `Unity-Tests/<unity-version>/` — one test project per supported Unity version, consuming the package via
   `file:`. A new version must also be added to `test_pull_request.yml` and `release.yml` (and
   `open-all-projects-*`).
@@ -44,20 +46,11 @@ maintainer-applied `ci-ok` label and abort if the PR touches `.github/workflows/
 
 ## Critical invariants
 
-- **Main thread only.** Every Unity API call inside a tool MUST be wrapped in
-  `MainThread.Instance.Run(() => { ... })` — MCP calls arrive off the main thread; only argument validation
-  runs outside. So must ReflectorNet calls (`reflector.Serialize`, `TryModify`).
-- **Tool shape.** One `[AiToolType] partial class Tool_InputSystem`, split one operation per file
-  (`InputSystem.AssetCreate.cs`, `InputSystem.BindingAdd.cs`, `InputSystem.Modify.cs`, …). Each tool method
-  carries `[AiTool(<id>, Title=…, …Hint=…)]`, `[AiSkillDescription]` / `[AiSkillBody]` and `[Description]`
-  (all LLM-facing); tool IDs are `public const string …ToolId = "inputsystem-…"`. Shared helpers (`LoadAsset`,
-  `GetActionMap`, `GetAction`, `SaveAsset`) live in `InputSystem.Helpers.cs`; error strings in
-  `Tool_InputSystem.Error` (`InputSystem.cs`).
-- **Asset-backed.** Tools edit `.inputactions` `InputActionAsset`s (`Assets/`-rooted paths) and every mutation
-  persists through `SaveAsset` (writes JSON, re-imports). Serialize with `ToSafeJson`, never raw `ToJson()`:
-  Input System 1.x throws on an asset with no action maps.
-- **Generic modify via ReflectorNet.** `inputsystem-modify` applies a `SerializedMember` diff through
-  `reflector.TryModify(ref boxed, data, …)`. The `fields` channel resolves `FieldInfo` and `props` resolves
-  `PropertyInfo`, with **no cross-fallback**: a public field MUST go in `fields`, a property in `props`
-  (otherwise: `Property '…' not found or not writable`).
+- **RQL shape (branch `experiment/rql`).** Agents use Unity-MCP's `rql-query` / `rql-mutate`; no `inputsystem-*`
+  tools remain. Assets and their parts are views addressed by id (`ActionMapView`, `ActionView`, `BindingView`;
+  `ControlSchemeView` by name) because a re-import replaces the map / action objects. Validation lives in
+  `InputValidation`; the guide in `InputSystemModule` must keep one runnable example per operation (a test runs them).
+- **Asset-backed.** Every write goes through `InputAssetStore.Edit` (Undo record, change, JSON to the
+  `.inputactions` file, re-import); Undo / Redo rewrite the file through `InputAssetStore.Resync`. Serialize with
+  `InputAssetStore.ToJson`, never raw `ToJson()`: Input System 1.x throws on an asset with no action maps.
 - Every C# file starts with the copyright box header and `#nullable enable`.
